@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CLANKER embed</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preload" href="https://fonts.googleapis.com/">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <style>
+            :root {
+                --bg: #222222;
+                --border: #ededed;
+                --text: #ccc;
+                --accent: #3498db;
+                --content: #2f2f2f;
+            }
+            body {
+                background: var(--bg);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: 0.5px solid var(--border);
+                padding: 12px;
+                background: var(--content);
+                border-radius: 4px;
+                width: 300px;
+            }
+            input[type="checkbox"] {
+                display: none;
+            }
+            a, span {
+                color: var(--text);
+                font-size: 14px;
+                margin-left: 8px;
+            }
+            .checkbox-container {
+                width: 20px;
+                height: 20px;
+                border: 2px solid var(--text);
+                border-radius: 3px;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: border-color .3s ease;
+            }
+            .loader {
+                border: 3px solid var(--border);
+                border-top: 3px solid var(--accent);
+                border-radius: 50%;
+                width: 12px;
+                height: 12px;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            .checkmark {
+                color: #27ae60;
+                font-size: 20px;
+                animation: growAndFadeIn .3s;
+            }
+            .wrong {
+                color: #ae2727;
+                font-size: 20px;
+                animation: growAndFadeIn .3s;
+            }
+            @keyframes growAndFadeIn {
+                0% {
+                    transform: scale(0.5);
+                    opacity: 0;
+                }
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+            dialog {
+                background: var(--content);
+                border: 0.5px solid var(--border);
+                color: var(--text);
+                border-radius: 8px;
+                padding: 8px;
+                gap: 8px;
+            }
+            dialog header {
+                background: var(--accent);
+                border-radius: 4px;
+                padding: 12px;
+                height: 72px;
+                width: 300px;
+            }
+            button {
+                background: var(--accent);
+                border: none;
+                border-radius: 4px;
+                color: var(--bg);
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 500;
+                padding: 8px 24px;
+            }
+            dialog footer {
+                display: flex;
+                justify-content: right;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div style="display: flex; align-items: center;">
+                <input type="checkbox" id="checkbox">
+                <div class="checkbox-container" id="checkbox-container"></div>
+                <span id="status">I'm not a human</span>
+            </div>
+            <div>
+                <img src="./logo/typographic.svg" style="width: 100px; height: auto;">
+                <div>
+                    <a href="https://github.com/Mewinator/CLANKER">About</a>
+                    <a href="https://github.com/Mewinator">Follow</a>
+                </div>
+            </div>
+        </div>
+        <dialog>
+            <header>
+                <span id="prompt" style="color: var(--bg); font-weight: 500;"></span>
+            </header>
+            <main style="overflow-x: none;"></main>
+            <footer>
+                <button onclick="verify()">Verify</button>
+            </footer>
+        </dialog>
+
+        <template id="cursor-line-template">
+            <canvas id="cursor-canvas" width="300" height="200" style="border: 1px solid var(--border);"></canvas>
+            <button id="reset-canvas" style="margin-top: 10px;">Reset</button>
+        </template>
+
+        <template id="box-select-template">
+            <div id="box-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px;">
+            </div>
+        </template>
+
+        <template id="timer-template">
+            <div id="timer-display" style="text-align: center; font-size: 24px; padding: 20px;"></div>
+        </template>
+
+        <template id="input-template">
+            <input type="text" id="answer-input" placeholder="Your answer..." style="width: calc(100% - 20px); padding: 10px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); color: var(--text);">
+        </template>
+
+        <template id="select-template">
+            <select id="answer-select" style="width: calc(100% - 20px); padding: 10px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); color: var(--text);">
+            </select>
+        </template>
+
+        <script src="./embed.js"></script>
+    </body>
+</html>
