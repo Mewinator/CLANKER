@@ -25,6 +25,11 @@ To use CLANKER on your website, you can embed the widget using an iframe:
 ```
 
 You will need to host the `clank` directory containing `embed.html`, `embed.js`, and the `logo` folder on your web server.
+Or you could use the already hosted verison:
+
+```html
+<iframe src="https://mewinator.github.io/CLANKER/embed.html" width="320" height="80" style="border:none;"></iframe>
+```
 
 ## Customization
 
